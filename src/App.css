@@ -1,0 +1,81 @@
+.app-container {
+  min-height: 100vh;
+  background: #f5f5f5;
+  padding: 24px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 24px;
+  padding: 16px 0;
+  background: linear-gradient(135deg, #1a3976 0%, #152850 100%);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.header-title {
+  color: #fff !important;
+  margin: 0 !important;
+  letter-spacing: 2px;
+}
+
+.search-card {
+  margin-bottom: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.table-card {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.table-header {
+  padding-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-stats {
+  color: #666;
+  font-size: 14px;
+}
+
+.ant-table-cell {
+  white-space: pre-wrap !important;
+  word-break: break-word;
+  vertical-align: top;
+}
+
+.resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  cursor: col-resize;
+  z-index: 1;
+}
+
+.resize-handle:hover,
+.resize-handle:active {
+  background: #d9d9d9;
+}
+
+.ant-table-thead > tr > th {
+  position: relative;
+}
+
+.ant-table-thead > tr > th .column-resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: col-resize;
+  background: transparent;
+  z-index: 1;
+}
+
+.ant-table-thead > tr > th .column-resize-handle:hover {
+  background: #d9d9d9;
+}
