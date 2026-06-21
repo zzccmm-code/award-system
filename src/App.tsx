@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import LoginPage from "./LoginPage";
 import { useAuth, authFetch } from "./auth";
 import { Table, Input, Select, Button, Space, Card, Tag, Typography, Row, Col, message, Upload, Modal, Progress, Form, Popconfirm } from "antd";
@@ -48,13 +48,9 @@ function App() {
   const [editRecord, setEditRecord] = useState<AwardItem | null>(null);
   const [editForm] = Form.useForm();
   const [colWidths, setColWidths] = useState<Record<string, number>>({});
-  const { token, user, loading: authLoading, logout } = useAuth();
+  const { token, loading: authLoading, logout } = useAuth();
 
-  const onResize = (key: string) => (_e: any, { size }: any) => {
-    setColWidths(prev => ({ ...prev, [key]: Math.max(60, size.width) }));
-  };
-
-  const fetchAwards = useCallback(async (kw?, yr?, tp?, p?, ps?) => {
+  const fetchAwards = useCallback(async (kw?: string, yr?: number, _tp?: string, p?: number, ps?: number) => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -173,12 +169,12 @@ function App() {
 
 
 
-  const handleUpload = async (file: File, type: "excel" | "pdf") => {
+  const handleUpload = async (file: File, type: "excel" | "pdf" | "word") => {
     setUploading(true);
     setProgressPct(0);
     setProgressMsg("");
 
-    if (type === "pdf" || type === "word") {
+    if (type === "pdf" || (type as string) === "word") {
       const formData = new FormData();
       const rawFile = (file as any).originFileObj || file;
       formData.append("file", rawFile);
