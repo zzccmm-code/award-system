@@ -27,6 +27,23 @@ app.include_router(auth.router)
 @app.on_event("startup")
 def on_startup():
     init_db()
+    from .database import SessionLocal
+    from .models import User
+    from .auth import hash_password
+    db = SessionLocal()
+    try:
+        if db.query(User).count() == 0:
+            admin = User(
+                username="admin",
+                hashed_password=hash_password("admin123"),
+                display_name="系统管理员",
+                is_active=1,
+            )
+            db.add(admin)
+            db.commit()
+            logger.info("Created default admin user (admin / admin123)")
+    finally:
+        db.close()
 
 
 @app.get("/health")

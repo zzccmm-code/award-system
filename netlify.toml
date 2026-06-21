@@ -2,15 +2,14 @@
   command = "npm install && npx vite build"
   publish = "dist"
 
-# SPA routing: redirect all routes to index.html
+# API proxy: forward /api/* to Railway backend (must come first)
+[[redirects]]
+  from = "/api/*"
+  to = "https://award-system-production.up.railway.app/api/:splat"
+  status = 200
+
+# SPA routing: catch-all to index.html
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-# API proxy: forward /api/* to your backend server
-# Replace YOUR_BACKEND_URL with the actual URL of your Python backend
-# [[redirects]]
-#   from = "/api/*"
-#   to = "https://YOUR_BACKEND_URL/api/:splat"
-#   status = 200
