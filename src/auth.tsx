@@ -17,13 +17,15 @@ interface AuthContextType {
 }
 
 
+const API_BASE = import.meta.env.VITE_API_URL || '';
+
 export function authFetch(url: string, options: RequestInit = {}): Promise<Response> {
   const token = localStorage.getItem(TOKEN_KEY);
   const headers = new Headers(options.headers || {});
   if (token) {
     headers.set("Authorization", "Bearer " + token);
   }
-  return fetch(url, { ...options, headers });
+  return fetch(API_BASE + url, { ...options, headers });
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -44,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = useCallback(async (username: string, password: string) => {
-    const resp = await fetch("/api/auth/login", {
+    const resp = await fetch(API_BASE + "/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password }),
@@ -66,7 +68,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
       return;
     }
-    fetch("/api/auth/me", {
+    fetch(API_BASE + "/api/auth/me", {
       headers: { Authorization: "Bearer " + token },
     })
       .then((resp) => {
