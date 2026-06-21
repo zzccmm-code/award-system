@@ -5,7 +5,7 @@
 # API proxy: forward /api/* to Railway backend (must come first)
 [[redirects]]
   from = "/api/*"
-  to = "https://award-system-production.up.railway.app/api/:splat"
+  to = "https://selfless-beauty-production-7322.up.railway.app/api/:splat"
   status = 200
 
 # SPA routing: catch-all to index.html
